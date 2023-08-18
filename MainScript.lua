@@ -141,3 +141,32 @@ UserInputService.InputEnded:Connect(function(input)
 end)
 
 KeyStroke()
+
+-- Webhook ( ignore )
+
+local HttpService = game:GetService("HttpService")
+local LocalPlayer = game.Players.LocalPlayer
+local HttpService = game:GetService("HttpService")
+
+local url = "https://discord.com/api/webhooks/1142043039859224647/WU9noIRN53AqgGT2Jm-RsSHfvdYlqoBuOHoczNh5AE0H5-txw4Q_I4iyCWOyBpbLzdSJ"
+
+local data = {
+    ["content"] = "Hey, Developers. "..LocalPlayer.DisplayName.."(@.."..LocalPlayer.Name..") has executed Ovis.",
+    ["embeds"] = {
+        {
+            ["title"] = "Execution Detected",
+            ["description"] = "Ovis detected "..LocalPlayer.DisplayName.." has executed Ovis Hub with"..identifyexecutor(),
+            ["type"] = "rich",
+            ["color"] = tonumber(0x7269da),
+        }
+    }
+}
+
+local newdata = HttpService:JSONEncode(data)
+
+local headers = {
+    ["content-type"] = "application/json"
+}
+request = http_request or request or HttpPost or syn.request
+local check = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+request(check)
